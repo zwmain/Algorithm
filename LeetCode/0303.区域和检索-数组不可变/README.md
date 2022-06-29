@@ -1,33 +1,30 @@
-# 1342.将数字变成0的操作次数
+# 0303.区域和检索-数组不可变
 
-链接：[1342.将数字变成0的操作次数](https://leetcode.cn/problems/number-of-steps-to-reduce-a-number-to-zero/)
+链接：[0303.区域和检索-数组不可变](https://leetcode.cn/problems/range-sum-query-immutable/)
 
 ## 我的解法
-
-没什么特殊的想法，就是按照题目意思将一个数减为0，统计次数s
-
-## 官方解法
-
-使用位运算
 
 ## 源码
 
 ```c++
-class Solution {
+class NumArray {
 public:
-    int numberOfSteps(int num)
+    NumArray(vector<int>& nums)
+        : _nums(nums)
+    {
+    }
+
+    int sumRange(int left, int right)
     {
         int cnt = 0;
-        while (num != 0) {
-            if (num % 2 == 0) {
-                num /= 2;
-            } else {
-                num -= 1;
-            }
-            ++cnt;
+        for (int i = left; i <= right; ++i) {
+            cnt += _nums[i];
         }
         return cnt;
     }
+
+private:
+    vector<int>& _nums;
 };
 
 ```
