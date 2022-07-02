@@ -23,7 +23,7 @@ public:
                 _pre_mat[i][j]
                     = matrix[i - 1][j - 1]
                     + _pre_mat[i - 1][j]
-                    + _pre_mat[j][j - 1]
+                    + _pre_mat[i][j - 1]
                     - _pre_mat[i - 1][j - 1];
             }
         }
