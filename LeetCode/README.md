@@ -25,7 +25,9 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${UTIL_DIR})
 
 ```
 
-## 前缀和数组
+## 数组算法
+
+### 前缀和数组
 
 [0303.区域和检索-数组不可变](./0303.区域和检索-数组不可变/README.md)
 

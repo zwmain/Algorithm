@@ -79,6 +79,13 @@ void destroyList(std::vector<ListNode*>& list_arr);
  */
 std::vector<int> inputInt(const std::string& fp);
 
+/**
+ * @brief 输出整数数组
+ *
+ * @param arr 整数数组
+ */
+void outputIntArr(const std::vector<int>& arr);
+
 // ----------------------------------------------------------------------------
 
 std::vector<std::vector<int>> inputIntArr(const std::string& fp)
@@ -156,6 +163,21 @@ std::vector<int> inputInt(const std::string& fp)
         res.push_back(std::stoi(line));
     }
     return res;
+}
+
+void outputIntArr(const std::vector<int>& arr)
+{
+    bool is_first = true;
+    std::cout << '[';
+    for (auto i : arr) {
+        if (is_first) {
+            std::cout << i;
+            is_first = false;
+        } else {
+            std::cout << ", " << i;
+        }
+    }
+    std::cout << ']' << std::endl;
 }
 
 } // namespace zwn
