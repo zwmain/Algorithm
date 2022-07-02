@@ -25,6 +25,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${UTIL_DIR})
 
 ```
 
-## 简单
+## 前缀和数组
 
-1480.一维数组的动态和
+[0303.区域和检索-数组不可变](./0303.区域和检索-数组不可变/README.md)
+
+[0304.二维区域和检索-矩阵不可变](./0304.二维区域和检索-矩阵不可变/README.md)
