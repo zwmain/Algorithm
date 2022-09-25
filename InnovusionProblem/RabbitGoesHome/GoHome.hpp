@@ -34,14 +34,22 @@ public:
     /**
      * @brief 路径数量，返回所有路径
      *
-     * @return 路径数量
+     * @return 所有路径
      */
     std::vector<std::vector<std::pair<size_t, size_t>>> goHomeD();
+
+    /**
+     * @brief 路径数量，返回所有路径
+     *
+     * @return 所有路径
+     */
+    std::vector<std::vector<std::pair<size_t, size_t>>> goHomeE();
 
 private:
     std::vector<std::vector<int>> _cells;
     size_t _pathCnt = 0;
     std::vector<std::pair<size_t, size_t>> _dirs = { { 1, 0 }, { 0, 1 } };
+    std::vector<std::pair<int, int>> _eDirs = { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
 
     /**
      * @brief 路径数量回溯法实现
@@ -60,6 +68,20 @@ private:
      * @param allPath 所有路径
      */
     void goHomeD(
+        size_t row,
+        size_t col,
+        std::vector<std::pair<size_t, size_t>>& onePath,
+        std::vector<std::vector<std::pair<size_t, size_t>>>& allPath);
+
+    /**
+     * @brief 所有路径，回溯法实现
+     *
+     * @param row 当前位置行
+     * @param col 当前位置列
+     * @param onePath 一条路径
+     * @param allPath 所有路径
+     */
+    void goHomeE(
         size_t row,
         size_t col,
         std::vector<std::pair<size_t, size_t>>& onePath,
@@ -106,6 +128,16 @@ std::vector<std::vector<std::pair<size_t, size_t>>> Rabbit::goHomeD()
     _cells[0][0] = 0;
     return allPath;
 }
+std::vector<std::vector<std::pair<size_t, size_t>>> Rabbit::goHomeE()
+{
+    std::vector<std::vector<std::pair<size_t, size_t>>> allPath;
+    std::vector<std::pair<size_t, size_t>> onePath;
+    _cells[0][0] = 2;
+    onePath.push_back({ 0, 0 });
+    goHomeE(0, 0, onePath, allPath);
+    _cells[0][0] = 0;
+    return allPath;
+}
 
 void Rabbit::goHomeA(size_t row, size_t col)
 {
@@ -143,7 +175,31 @@ void Rabbit::goHomeD(
         }
         _cells[r][c] = 2;
         onePath.push_back({ r, c });
-        goHomeA(r, c);
+        goHomeD(r, c, onePath, allPath);
+        _cells[r][c] = 0;
+        onePath.pop_back();
+    }
+}
+
+void Rabbit::goHomeE(
+    size_t row,
+    size_t col,
+    std::vector<std::pair<size_t, size_t>>& onePath,
+    std::vector<std::vector<std::pair<size_t, size_t>>>& allPath)
+{
+    if (row == _cells.size() - 1 && col == _cells[0].size() - 1) {
+        allPath.push_back(onePath);
+        return;
+    }
+    for (auto& dir : _eDirs) {
+        int r = row + dir.first;
+        int c = col + dir.second;
+        if (!(r < _cells.size() && c < _cells[0].size()) || _cells[r][c] != 0) {
+            continue;
+        }
+        _cells[r][c] = 2;
+        onePath.push_back({ r, c });
+        goHomeE(r, c, onePath, allPath);
         _cells[r][c] = 0;
         onePath.pop_back();
     }
