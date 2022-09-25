@@ -24,6 +24,13 @@ public:
      */
     size_t goHomeA();
 
+    /**
+     * @brief 路径数量，优化
+     *
+     * @return 路径数量
+     */
+    size_t goHomeB();
+
 private:
     std::vector<std::vector<int>> _cells;
     size_t _pathCnt = 0;
@@ -60,6 +67,12 @@ size_t Rabbit::goHomeA()
     goHomeA(0, 0);
     _cells[0][0] = 0;
     return _pathCnt;
+}
+
+size_t Rabbit::goHomeB()
+{
+    // todo 优化实现
+    return 0;
 }
 
 void Rabbit::goHomeA(size_t row, size_t col)
