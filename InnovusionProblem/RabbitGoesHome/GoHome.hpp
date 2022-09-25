@@ -1,9 +1,27 @@
 #include <utility>
 #include <vector>
+#include <iostream>
 
+/**
+ * @brief 兔子回家
+ * 矩阵中0-未访问；1-有蛇；2-已访问
+ */
 class Rabbit {
 public:
+    /**
+     * @brief 构造函数，一个MxN矩阵，和蛇的位置
+     *
+     * @param M 列数
+     * @param N 行数
+     * @param snakeSite 蛇的位置（行，列）
+     */
     Rabbit(size_t M, size_t N, const std::vector<std::pair<size_t, size_t>>& snakeSite);
+
+    /**
+     * @brief 路径数量
+     *
+     * @return 路径数量
+     */
     size_t goHomeA();
 
 private:
@@ -11,6 +29,12 @@ private:
     size_t _pathCnt = 0;
     std::vector<std::pair<size_t, size_t>> _dirs = { { 1, 0 }, { 0, 1 } };
 
+    /**
+     * @brief 路径数量回溯法实现
+     *
+     * @param row 当前位置行
+     * @param col 当前位置列
+     */
     void goHomeA(size_t row, size_t col);
 };
 
@@ -32,7 +56,9 @@ Rabbit::Rabbit(size_t M, size_t N, const std::vector<std::pair<size_t, size_t>>&
 size_t Rabbit::goHomeA()
 {
     _cells[0][0] = 2;
+    _pathCnt=0;
     goHomeA(0, 0);
+    _cells[0][0] = 0;
     return _pathCnt;
 }
 
