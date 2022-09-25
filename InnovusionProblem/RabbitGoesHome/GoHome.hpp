@@ -1,6 +1,6 @@
+#include <iostream>
 #include <utility>
 #include <vector>
-#include <iostream>
 
 /**
  * @brief 兔子回家
@@ -31,6 +31,13 @@ public:
      */
     size_t goHomeB();
 
+    /**
+     * @brief 路径数量，返回所有路径
+     *
+     * @return 路径数量
+     */
+    std::vector<std::vector<std::pair<size_t, size_t>>> goHomeD();
+
 private:
     std::vector<std::vector<int>> _cells;
     size_t _pathCnt = 0;
@@ -43,6 +50,20 @@ private:
      * @param col 当前位置列
      */
     void goHomeA(size_t row, size_t col);
+
+    /**
+     * @brief 所有路径，回溯法实现
+     *
+     * @param row 当前位置行
+     * @param col 当前位置列
+     * @param onePath 一条路径
+     * @param allPath 所有路径
+     */
+    void goHomeD(
+        size_t row,
+        size_t col,
+        std::vector<std::pair<size_t, size_t>>& onePath,
+        std::vector<std::vector<std::pair<size_t, size_t>>>& allPath);
 };
 
 Rabbit::Rabbit(size_t M, size_t N, const std::vector<std::pair<size_t, size_t>>& snakeSite)
@@ -63,7 +84,7 @@ Rabbit::Rabbit(size_t M, size_t N, const std::vector<std::pair<size_t, size_t>>&
 size_t Rabbit::goHomeA()
 {
     _cells[0][0] = 2;
-    _pathCnt=0;
+    _pathCnt = 0;
     goHomeA(0, 0);
     _cells[0][0] = 0;
     return _pathCnt;
@@ -73,6 +94,17 @@ size_t Rabbit::goHomeB()
 {
     // todo 优化实现
     return 0;
+}
+
+std::vector<std::vector<std::pair<size_t, size_t>>> Rabbit::goHomeD()
+{
+    std::vector<std::vector<std::pair<size_t, size_t>>> allPath;
+    std::vector<std::pair<size_t, size_t>> onePath;
+    _cells[0][0] = 2;
+    onePath.push_back({ 0, 0 });
+    goHomeD(0, 0, onePath, allPath);
+    _cells[0][0] = 0;
+    return allPath;
 }
 
 void Rabbit::goHomeA(size_t row, size_t col)
@@ -90,5 +122,29 @@ void Rabbit::goHomeA(size_t row, size_t col)
         _cells[r][c] = 2;
         goHomeA(r, c);
         _cells[r][c] = 0;
+    }
+}
+
+void Rabbit::goHomeD(
+    size_t row,
+    size_t col,
+    std::vector<std::pair<size_t, size_t>>& onePath,
+    std::vector<std::vector<std::pair<size_t, size_t>>>& allPath)
+{
+    if (row == _cells.size() - 1 && col == _cells[0].size() - 1) {
+        allPath.push_back(onePath);
+        return;
+    }
+    for (auto& dir : _dirs) {
+        size_t r = row + dir.first;
+        size_t c = col + dir.second;
+        if (!(r < _cells.size() && c < _cells[0].size()) || _cells[r][c] != 0) {
+            continue;
+        }
+        _cells[r][c] = 2;
+        onePath.push_back({ r, c });
+        goHomeA(r, c);
+        _cells[r][c] = 0;
+        onePath.pop_back();
     }
 }
