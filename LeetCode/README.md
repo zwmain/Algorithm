@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Win MSVC下需要手动指定源码编码类型
 if (MSVC)
-    add_compile_options("/utf-8")
+    add_compile_options("/source-charset:utf-8")
 endif()
 
 set(UTIL_DIR "../0000.Utils")
