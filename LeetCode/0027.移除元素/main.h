@@ -4,7 +4,7 @@ using namespace std;
 
 class Solution {
 public:
-    int removeElement0(vector<int>& nums, int val)
+    int removeElement(vector<int>& nums, int val)
     {
         size_t ind = 0;
         while (ind < nums.size()) {
@@ -14,9 +14,5 @@ public:
             ++ind;
         }
         return nums.size();
-    }
-    int removeElement(vector<int>& nums, int val)
-    {
-        return 0;
     }
 };
