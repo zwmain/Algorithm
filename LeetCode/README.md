@@ -19,8 +19,7 @@ endif()
 set(UTIL_DIR "../0000.Utils")
 set(UTIL_FILE "${UTIL_DIR}/Utils.hpp")
 
-
-add_definitions(-DINPUT_PATH="${PROJECT_SOURCE_DIR}/build/input.txt")
+add_definitions(-DINPUT_PATH="${PROJECT_SOURCE_DIR}/input.txt")
 
 add_executable(${PROJECT_NAME} main.cpp main.h ${UTIL_FILE})
 
