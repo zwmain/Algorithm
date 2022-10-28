@@ -69,7 +69,21 @@ std::vector<ListNode*> inputList(const std::string& fp);
  *
  * @param list_arr 链表数组
  */
-void destroyList(std::vector<ListNode*>& list_arr);
+void destroyListArr(std::vector<ListNode*>& list_arr);
+
+/**
+ * @brief 清除链表
+ *
+ * @param head 链表头节点
+ */
+void destroyList(ListNode* head);
+
+/**
+ * @brief 输出链表
+ *
+ * @param head 链表头节点
+ */
+void outputList(ListNode* head);
 
 /**
  * @brief 输入整数
@@ -143,7 +157,7 @@ std::vector<ListNode*> inputList(const std::string& fp)
     return res;
 }
 
-void destroyList(std::vector<ListNode*>& list_arr)
+void destroyListArr(std::vector<ListNode*>& list_arr)
 {
     for (ListNode* p_node : list_arr) {
         while (p_node) {
@@ -153,6 +167,28 @@ void destroyList(std::vector<ListNode*>& list_arr)
         }
     }
     list_arr.clear();
+}
+
+void destroyList(ListNode* head)
+{
+    while (head) {
+        ListNode* d = head;
+        head = head->next;
+        delete d;
+    }
+}
+
+void outputList(ListNode* head)
+{
+    if (!head) {
+        return;
+    }
+    std::cout << head->val;
+    head = head->next;
+    while (head) {
+        std::cout << ", " << head->val;
+    }
+    std::cout << std::endl;
 }
 
 std::vector<int> inputInt(const std::string& fp)
