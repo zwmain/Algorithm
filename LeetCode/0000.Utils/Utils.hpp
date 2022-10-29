@@ -187,6 +187,7 @@ void outputList(ListNode* head)
     head = head->next;
     while (head) {
         std::cout << ", " << head->val;
+        head = head->next;
     }
     std::cout << std::endl;
 }
