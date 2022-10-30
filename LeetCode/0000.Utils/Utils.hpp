@@ -100,6 +100,14 @@ std::vector<int> inputInt(const std::string& fp);
  */
 void outputIntArr(const std::vector<int>& arr);
 
+/**
+ * @brief 输入字符串
+ *
+ * @param fp 文件路径
+ * @return 字符串数组
+ */
+std::vector<std::string> inputStr(const std::string& fp);
+
 // ----------------------------------------------------------------------------
 
 std::vector<std::vector<int>> inputIntArr(const std::string& fp)
@@ -215,6 +223,11 @@ void outputIntArr(const std::vector<int>& arr)
         }
     }
     std::cout << ']' << std::endl;
+}
+
+std::vector<std::string> inputStr(const std::string& fp)
+{
+    return readFileAsLine(fp);
 }
 
 } // namespace zwn
