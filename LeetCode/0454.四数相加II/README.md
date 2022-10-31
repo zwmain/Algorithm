@@ -1,0 +1,46 @@
+# 0454.四数相加II
+
+链接：[0454.四数相加II](https://leetcode.cn/problems/4sum-ii/)
+
+思路：这题需要的结果是元组的个数。将四个数组分为两组，先求前两个数组的和，构建一个map，key是“和”，value是“和”出现的次数。
+然后在求解后两个数组，并算出与0的差。从map中查询这个“差”，如果查得到，那么计数加上出现的次数，注意不是加1。
+
+```c++
+class Solution {
+public:
+    int fourSumCount(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3, vector<int>& nums4)
+    {
+        // key是1、2两个数组元素的和
+        // value是“和”出现的次数
+        unordered_map<int, int> mapAB;
+        for (auto i1 : nums1) {
+            for (auto i2 : nums2) {
+                int sum = i1 + i2;
+                auto it = mapAB.find(sum);
+                if (it == mapAB.end()) {
+                    mapAB[sum] = 1;
+                } else {
+                    mapAB[sum] += 1;
+                }
+            }
+        }
+
+        int cnt = 0;
+        // 遍历后两个数组
+        for (auto i3 : nums3) {
+            for (auto i4 : nums4) {
+                // 求解后两个数组的元素和
+                // 求解0与元素和的差
+                int x = 0 - (i3 + i4);
+                // 查找差是否在map中
+                auto it = mapAB.find(x);
+                if (it != mapAB.end()) {
+                    cnt += it->second;
+                }
+            }
+        }
+        return cnt;
+    }
+};
+
+```
