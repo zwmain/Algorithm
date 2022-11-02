@@ -1,6 +1,6 @@
 # 剑指Offer005.替换空格
 
-链接：[剑指Offer005.替换空格](https://leetcode.cn/problems/reverse-string/)
+链接：[剑指Offer005.替换空格](https://leetcode.cn/problems/ti-huan-kong-ge-lcof/)
 
 思路：将数组扩容至替换后的大小，使用双指针，一个指向旧数组的最后一个元素，另一个指向新数组的最后一个元素。
 如果左边的指针指的不是空格，那么直接将其移到新数组位置，两个指针同时前移。
