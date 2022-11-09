@@ -68,25 +68,61 @@ struct TreeNode {
 };
 
 /**
- * @brief N叉数
+ * @brief N叉树节点
  *
  */
-class Node {
+class NaryTreeNode {
 public:
     int val;
-    std::vector<Node*> children;
+    std::vector<NaryTreeNode*> children;
 
-    Node() { }
+    NaryTreeNode() { }
 
-    Node(int _val)
+    NaryTreeNode(int _val)
     {
         val = _val;
     }
 
-    Node(int _val, std::vector<Node*> _children)
+    NaryTreeNode(int _val, std::vector<NaryTreeNode*> _children)
     {
         val = _val;
         children = _children;
+    }
+};
+
+/**
+ * @brief 二叉树，带next节点
+ *
+ */
+class NextTreeNode {
+public:
+    int val;
+    NextTreeNode* left;
+    NextTreeNode* right;
+    NextTreeNode* next;
+
+    NextTreeNode()
+        : val(0)
+        , left(NULL)
+        , right(NULL)
+        , next(NULL)
+    {
+    }
+
+    NextTreeNode(int _val)
+        : val(_val)
+        , left(NULL)
+        , right(NULL)
+        , next(NULL)
+    {
+    }
+
+    NextTreeNode(int _val, NextTreeNode* _left, NextTreeNode* _right, NextTreeNode* _next)
+        : val(_val)
+        , left(_left)
+        , right(_right)
+        , next(_next)
+    {
     }
 };
 
