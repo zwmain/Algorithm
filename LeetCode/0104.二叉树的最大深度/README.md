@@ -6,6 +6,10 @@
 
 层序遍历本身就包含“一层一层”的概念，只要按层递加，最终结果就是整棵树的层数。
 
+递归写法：通过自底向上求高度的方法求深度，对于根节点来说，其高度就是二叉树的最大深度。
+递归求高度，当前节点需要直到两颗子树的高度，然后大的那个值+1就是当前节点的高度。
+对于空节点来说，高度为0。
+
 ```c++
 class Solution {
 public:
@@ -34,6 +38,24 @@ public:
         }
 
         return depth;
+    }
+    // 递归写法，自底向上求二叉树的高度，root的高度就是二叉树的深度
+    int maxDepth2(TreeNode* root)
+    {
+        int res = getHeight(root);
+        return res;
+    }
+    int getHeight(TreeNode* node)
+    {
+        // 节点为空时，高度为0
+        if (node == nullptr) {
+            return 0;
+        }
+        int leftHeight = getHeight(node->left);
+        int rightHeight = getHeight(node->right);
+        // 当前节点高度就是左右子树高度大的那个+1
+        int max = leftHeight > rightHeight ? leftHeight : rightHeight;
+        return max + 1;
     }
 };
 
