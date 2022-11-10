@@ -14,6 +14,7 @@
 
 #include "../../../CppDemo/MyUtils/MyUtils.hpp"
 #include <iostream>
+#include <queue>
 
 /**
  * @brief 链表节点结构体
@@ -195,6 +196,29 @@ void outputIntArr(const std::vector<int>& arr);
  */
 std::vector<std::string> inputStr(const std::string& fp);
 
+/**
+ * @brief 根据字符串数组解析二叉树
+ *
+ * @param arr 层序遍历的二叉树节点
+ * @return TreeNode* 二叉树根节点
+ */
+TreeNode* parseTreeNode(const std::vector<std::string>& arr);
+
+/**
+ * @brief 输入二叉树
+ *
+ * @param fp 文件路径
+ * @return std::vector<TreeNode*> 二叉树数组
+ */
+std::vector<TreeNode*> inputTreeNode(const std::string& fp);
+
+/**
+ * @brief 递归析构二叉树
+ *
+ * @param root 二叉树根节点
+ */
+void destroyTreeNode(TreeNode* root);
+
 // ----------------------------------------------------------------------------
 
 std::vector<std::vector<int>> inputIntArr(const std::string& fp)
@@ -315,6 +339,62 @@ void outputIntArr(const std::vector<int>& arr)
 std::vector<std::string> inputStr(const std::string& fp)
 {
     return readFileAsLine(fp);
+}
+
+TreeNode* parseTreeNode(const std::vector<std::string>& arr)
+{
+    if (arr.empty()) {
+        return nullptr;
+    }
+    TreeNode* root = new TreeNode(stoi(arr[0]));
+    std::queue<TreeNode*> q;
+    q.push(root);
+    for (size_t i = 1; i < arr.size(); ++i) {
+        if (q.empty()) {
+            break;
+        }
+        TreeNode* cur = q.front();
+        q.pop();
+        if (arr[i] == "null") {
+            cur->left = nullptr;
+        } else {
+            cur->left = new TreeNode(stoi(arr[i]));
+            q.push(cur->left);
+        }
+        ++i;
+        if (i >= arr.size()) {
+            break;
+        }
+        if (arr[i] == "null") {
+            cur->right = nullptr;
+        } else {
+            cur->right = new TreeNode(stoi(arr[i]));
+            q.push(cur->right);
+        }
+    }
+    return root;
+}
+
+std::vector<TreeNode*> inputTreeNode(const std::string& fp)
+{
+    std::vector<TreeNode*> res;
+    auto lines = readFileAsLine(fp);
+    for (auto& s : lines) {
+        auto arr = splitString(s, ",");
+        TreeNode* root = parseTreeNode(arr);
+        res.push_back(root);
+    }
+    return res;
+}
+
+void destroyTreeNode(TreeNode* root)
+{
+    if (root == nullptr) {
+        return;
+    }
+    destroyTreeNode(root->left);
+    destroyTreeNode(root->right);
+    delete root;
 }
 
 } // namespace zwn
