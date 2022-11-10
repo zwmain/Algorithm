@@ -7,6 +7,13 @@
 
 int main()
 {
-    // todo
+    string fp(INPUT_PATH);
+    auto input = zwn::inputTreeNode(fp);
+    Solution s;
+    for (auto& t : input) {
+        auto res = s.preorderTraversal(t);
+        zwn::outputIntArr(res);
+        zwn::destroyTreeNode(t);
+    }
     return 0;
 }
