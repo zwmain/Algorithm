@@ -219,6 +219,13 @@ std::vector<TreeNode*> inputTreeNode(const std::string& fp);
  */
 void destroyTreeNode(TreeNode* root);
 
+/**
+ * @brief 层序输出二叉树
+ *
+ * @param root 二叉树根节点
+ */
+void outputTreeNode(TreeNode* root);
+
 // ----------------------------------------------------------------------------
 
 std::vector<std::vector<int>> inputIntArr(const std::string& fp)
@@ -395,6 +402,33 @@ void destroyTreeNode(TreeNode* root)
     destroyTreeNode(root->left);
     destroyTreeNode(root->right);
     delete root;
+}
+
+void outputTreeNode(TreeNode* root)
+{
+    std::string res("[");
+    std::queue<TreeNode*> q;
+    q.push(root);
+    while (!q.empty()) {
+        TreeNode* cur = q.front();
+        q.pop();
+        if (cur == nullptr) {
+            res += "null";
+        } else {
+            // 叶节点的两个空子树不会被加入队列
+            if (!(cur->left == nullptr && cur->right == nullptr)) {
+                q.push(cur->left);
+                q.push(cur->right);
+            }
+            res += std::to_string(cur->val);
+        }
+        res += ",";
+    }
+    if (res[res.size() - 1] == ',') {
+        res.pop_back();
+    }
+    res += "]";
+    std::cout << res << std::endl;
 }
 
 } // namespace zwn
