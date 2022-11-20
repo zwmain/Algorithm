@@ -10,7 +10,7 @@
 
 
 ```c++
-ass Solution {
+class Solution {
 public:
     vector<string> letterCombinations(string digits)
     {
