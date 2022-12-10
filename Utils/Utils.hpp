@@ -182,6 +182,15 @@ void outputList(ListNode* head);
 std::vector<int> inputInt(const std::string& fp);
 
 /**
+ * @brief 输出数组
+ *
+ * @tparam T 可以直接cout的类型
+ * @param arr 待输出的数组
+ */
+template <typename T>
+void outputArr(const std::vector<T>& arr);
+
+/**
  * @brief 输出整数数组
  *
  * @param arr 整数数组
@@ -326,6 +335,22 @@ std::vector<int> inputInt(const std::string& fp)
         res.push_back(std::stoi(line));
     }
     return res;
+}
+
+template <typename T>
+void outputArr(const std::vector<T>& arr)
+{
+    bool is_first = true;
+    std::cout << '[';
+    for (const auto& i : arr) {
+        if (is_first) {
+            std::cout << i;
+            is_first = false;
+        } else {
+            std::cout << ", " << i;
+        }
+    }
+    std::cout << ']' << std::endl;
 }
 
 void outputIntArr(const std::vector<int>& arr)
