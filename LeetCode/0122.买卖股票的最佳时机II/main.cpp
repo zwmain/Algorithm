@@ -12,7 +12,7 @@ int main()
     auto input = zwn::inputIntArr(fp);
     for (size_t i = 0; i < input.size(); ++i) {
         Solution s;
-        auto res = s.maxProfit(input[i]);
+        auto res = s.maxProfit2(input[i]);
         cout << res << endl;
     }
     return 0;
