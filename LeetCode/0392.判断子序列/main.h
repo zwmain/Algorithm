@@ -33,6 +33,7 @@ public:
                 }
             }
         }
+        zwn::outputIntArrArr(dp);
         return dp.back().back() == s.size();
     }
 };
