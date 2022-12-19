@@ -198,6 +198,13 @@ void outputArr(const std::vector<T>& arr);
 void outputIntArr(const std::vector<int>& arr);
 
 /**
+ * @brief 输出二维整数数组
+ *
+ * @param arr 二维整数数组
+ */
+void outputIntArrArr(const std::vector<std::vector<int>>& arr);
+
+/**
  * @brief 输入字符串
  *
  * @param fp 文件路径
@@ -366,6 +373,15 @@ void outputIntArr(const std::vector<int>& arr)
         }
     }
     std::cout << ']' << std::endl;
+}
+
+void outputIntArrArr(const std::vector<std::vector<int>>& arr)
+{
+    std::cout << "[" << std::endl;
+    for (auto& v : arr) {
+        outputArr(v);
+    }
+    std::cout << "]" << std::endl;
 }
 
 std::vector<std::string> inputStr(const std::string& fp)
